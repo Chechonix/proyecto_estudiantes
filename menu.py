@@ -1,14 +1,14 @@
 from actions import (
-    ingresar_estudiantes,
-    ver_estudiantes,
-    top_3_estudiantes,
-    promedio_general,
-    eliminar_estudiante,
-    ver_reprobados
+    add_students,
+    view_students,
+    top_3_students,
+    general_average,
+    delete_student,
+    view_failing_students
 )
-from data import exportar_csv, importar_csv
+from data import export_to_csv, import_from_csv
 
-def mostrar_menu(estudiantes):
+def show_menu(students):
     while True:
         print("\n===== MENÚ PRINCIPAL =====")
         print("1. Ingresar estudiantes")
@@ -21,25 +21,25 @@ def mostrar_menu(estudiantes):
         print("8. Ver estudiantes reprobados")
         print("9. Salir")
 
-        opcion = input("Seleccione una opción: ")
+        option = input("Seleccione una opción: ")
 
-        if opcion == "1":
-            ingresar_estudiantes(estudiantes)
-        elif opcion == "2":
-            ver_estudiantes(estudiantes)
-        elif opcion == "3":
-            top_3_estudiantes(estudiantes)
-        elif opcion == "4":
-            promedio_general(estudiantes)
-        elif opcion == "5":
-            exportar_csv(estudiantes)
-        elif opcion == "6":
-            importar_csv(estudiantes)
-        elif opcion == "7":
-            eliminar_estudiante(estudiantes)
-        elif opcion == "8":
-            ver_reprobados(estudiantes)
-        elif opcion == "9":
+        if option == "1":
+            add_students(students)
+        elif option == "2":
+            view_students(students)
+        elif option == "3":
+            top_3_students(students)
+        elif option == "4":
+            general_average(students)
+        elif option == "5":
+            export_to_csv(students)
+        elif option == "6":
+            import_from_csv(students)
+        elif option == "7":
+            delete_student(students)
+        elif option == "8":
+            view_failing_students(students)
+        elif option == "9":
             print("Saliendo del programa...")
             break
         else:

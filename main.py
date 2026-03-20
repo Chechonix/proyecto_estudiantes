@@ -1,8 +1,8 @@
-from menu import mostrar_menu
+from menu import show_menu 
 
 def main():
-    estudiantes = []
-    mostrar_menu(estudiantes)
+    students = [] 
+    show_menu(students)
 
 if __name__ == "__main__":
     main()

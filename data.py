@@ -1,36 +1,36 @@
 import csv
 import os
 
-ARCHIVO = "estudiantes.csv"
+FILE_NAME = "students.csv"
 
-def exportar_csv(estudiantes):
-    if not estudiantes:
+def export_to_csv(students):
+    if not students:
         print("No hay datos para exportar.")
         return
 
-    with open(ARCHIVO, mode="w", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=estudiantes[0].keys())
+    with open(FILE_NAME, mode="w", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=students[0].keys())
         writer.writeheader()
-        writer.writerows(estudiantes)
+        writer.writerows(students)
 
     print("Datos exportados correctamente.")
 
-def importar_csv(estudiantes):
-    if not os.path.exists(ARCHIVO):
+def import_from_csv(students):
+    if not os.path.exists(FILE_NAME):
         print("No existe un archivo previamente exportado.")
         return
 
-    with open(ARCHIVO, mode="r") as file:
+    with open(FILE_NAME, mode="r") as file:
         reader = csv.DictReader(file)
-        estudiantes.clear()
+        students.clear()
         for row in reader:
-            estudiantes.append({
-                "nombre": row["nombre"],
-                "seccion": row["seccion"],
-                "espanol": float(row["espanol"]),
-                "ingles": float(row["ingles"]),
-                "sociales": float(row["sociales"]),
-                "ciencias": float(row["ciencias"])
+            students.append({
+                "name": row["name"],
+                "section": row["section"],
+                "spanish_grade": float(row["spanish_grade"]),
+                "english_grade": float(row["english_grade"]),
+                "social_studies_grade": float(row["social_studies_grade"]),
+                "science_grade": float(row["science_grade"])
             })
 
     print("Datos importados correctamente.")
