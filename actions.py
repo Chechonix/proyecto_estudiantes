@@ -67,8 +67,12 @@ def view_students(students):
         print(student)
 
 def calculate_average(student):
-    return (student["spanish_grade"] + student["english_grade"] + 
-            student["social_studies_grade"] + student["science_grade"]) / 4
+    return (
+        student["spanish_grade"] +
+        student["english_grade"] +
+        student["social_studies_grade"] +
+        student["science_grade"]
+    ) / 4
 
 def top_3_students(students):
     if len(students) < 1:
@@ -108,20 +112,22 @@ def delete_student(students):
 
     print("Estudiante no encontrado.")
 
-    for student in students:
-        failed_subjects = []
-        subjects = {
-            "spanish_grade": "Español",
-            "english_grade": "Inglés",
-            "social_studies_grade": "Sociales",
-            "science_grade": "Ciencias"
-        }
-        
-        for key, label in subjects.items():
-            if student[key] < 60:
-                failed_subjects.append((label, student[key]))
+# ✅ FUNCIÓN CORRECTA (la que te pidió el profe)
+def view_failing_students(students):
+    if not students:
+        print("No hay estudiantes registrados.")
+        return
 
-        if failed_subjects:
-            print(f"\n{student['name']} - {student['section']}")
-            for subject, grade in failed_subjects:
-                print(f"{subject}: {grade}")
+    print("\n--- ESTUDIANTES REPROBADOS ---")
+
+    found = False
+
+    for student in students:
+        avg = calculate_average(student)
+
+        if avg < 70:
+            print(f"{student['name']} - {student['section']} - Promedio: {avg}")
+            found = True
+
+    if not found:
+        print("No hay estudiantes reprobados.")
