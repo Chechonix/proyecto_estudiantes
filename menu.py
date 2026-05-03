@@ -43,4 +43,4 @@ def show_menu(students):
             print("Saliendo del programa...")
             break
         else:
-            print("⚠ Opción inválida. Intente nuevamente.")
+           print("\n Opción inválida. Intente nuevamente.\n")
