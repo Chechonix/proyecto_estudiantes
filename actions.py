@@ -23,12 +23,14 @@ def request_grade(subject):
         except:
             print("Debe ingresar un número válido.")
 
+# ✅ FIX: ahora no se rompe si el usuario mete mal el número
 def add_students(students):
-    try:
-        count = int(input("¿Cuántos estudiantes desea ingresar? "))
-    except:
-        print("Debe ingresar un número válido.")
-        return
+    while True:
+        try:
+            count = int(input("¿Cuántos estudiantes desea ingresar? "))
+            break
+        except:
+            print("Debe ingresar un número válido.")
 
     for _ in range(count):
         while True:
@@ -58,13 +60,19 @@ def add_students(students):
 
         students.append(student)
 
+# ✅ FIX: ahora se muestra bonito y ordenado
 def view_students(students):
     if not students:
         print("No hay estudiantes registrados.")
         return
 
+    print("\n===== LISTA DE ESTUDIANTES =====")
     for student in students:
-        print(student)
+        avg = calculate_average(student)
+        print(f"Nombre: {student['name']}")
+        print(f"Sección: {student['section']}")
+        print(f"Promedio: {avg:.2f}")
+        print("----------------------------")
 
 def calculate_average(student):
     return (
@@ -75,14 +83,16 @@ def calculate_average(student):
     ) / 4
 
 def top_3_students(students):
-    if len(students) < 1:
+    if not students:
         print("No hay estudiantes registrados.")
         return
 
     sorted_students = sorted(students, key=calculate_average, reverse=True)
-    print("\n--- TOP 3 ---")
-    for student in sorted_students[:3]:
-        print(student["name"], "-", calculate_average(student))
+    print("\n===== TOP 3 ESTUDIANTES =====")
+
+    for i, student in enumerate(sorted_students[:3], start=1):
+        avg = calculate_average(student)
+        print(f"{i}. {student['name']} - {avg:.2f}")
 
 def general_average(students):
     if not students:
@@ -93,7 +103,7 @@ def general_average(students):
     for student in students:
         total_sum += calculate_average(student)
 
-    print("Promedio general:", total_sum / len(students))
+    print(f"Promedio general: {total_sum / len(students):.2f}")
 
 def delete_student(students):
     name = input("Nombre del estudiante a eliminar: ")
@@ -112,13 +122,13 @@ def delete_student(students):
 
     print("Estudiante no encontrado.")
 
-# ✅ FUNCIÓN CORRECTA (la que te pidió el profe)
+# ✅ FUNCIÓN CORRECTA (independiente, como pidió el profe)
 def view_failing_students(students):
     if not students:
         print("No hay estudiantes registrados.")
         return
 
-    print("\n--- ESTUDIANTES REPROBADOS ---")
+    print("\n===== ESTUDIANTES REPROBADOS =====")
 
     found = False
 
@@ -126,7 +136,10 @@ def view_failing_students(students):
         avg = calculate_average(student)
 
         if avg < 70:
-            print(f"{student['name']} - {student['section']} - Promedio: {avg}")
+            print(f"Nombre: {student['name']}")
+            print(f"Sección: {student['section']}")
+            print(f"Promedio: {avg:.2f}")
+            print("----------------------------")
             found = True
 
     if not found:
